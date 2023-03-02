@@ -20,12 +20,12 @@
 	    </jarModule>
 	    <webModule>
 	      <artifactId>jhee-frontend-services</artifactId>
-	      <contextRoot>/srvs</contextRoot>
+	      <contextRoot>/jhee/srvs</contextRoot>
 	      <groupId>io.github.agbaroni</groupId>
 	    </webModule>
 	    <webModule>
 	      <artifactId>jhee-frontend-web</artifactId>
-	      <contextRoot>/apps</contextRoot>
+	      <contextRoot>/jhee/apps</contextRoot>
 	      <groupId>io.github.agbaroni</groupId>
 	    </webModule>
 	  </modules>

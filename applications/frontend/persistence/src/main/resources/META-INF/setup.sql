@@ -1,0 +1,3 @@
+
+INSERT INTO USERS (USER_NAME, FIRST_NAME, LAST_NAME, AGE) VALUES ('wamadeus', 'Wolfgang', 'Mozart', 35);
+INSERT INTO USERS (USER_NAME, FIRST_NAME, LAST_NAME, AGE) VALUES ('jsebastian', 'Johann', 'Bach', 65);
