@@ -2,19 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>jhee-frontend-services</artifactId>
+  <artifactId>jhee-backend-business</artifactId>
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-war-plugin</artifactId>
+        <artifactId>maven-ejb-plugin</artifactId>
+        <configuration>
+	  <ejbVersion>3.2</ejbVersion>
+        </configuration>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>3.3.2</version>
+        <version>3.2.1</version>
       </plugin>
     </plugins>
   </build>
   <dependencies>
     <dependency>
-      <artifactId>jhee-frontend-business-client</artifactId>
+      <artifactId>jhee-backend-business-client</artifactId>
       <groupId>io.github.agbaroni</groupId>
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
@@ -26,10 +29,10 @@
   </dependencies>
   <groupId>io.github.agbaroni</groupId>
   <modelVersion>4.0.0</modelVersion>
-  <name>JHEE - Frontend - Services</name>
-  <packaging>war</packaging>
+  <name>JHEE - Backend - Business</name>
+  <packaging>ejb</packaging>
   <parent>
-    <artifactId>jhee-frontend-parent</artifactId>
+    <artifactId>jhee-backend-parent</artifactId>
     <groupId>io.github.agbaroni</groupId>
     <version>0.1.0-SNAPSHOT</version> 
   </parent>

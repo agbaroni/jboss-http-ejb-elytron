@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>jhee-frontend</artifactId>
+  <artifactId>jhee-backend</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -11,23 +11,13 @@
 	  <defaultLibBundleDir>lib</defaultLibBundleDir>
 	  <modules>
 	    <ejbModule>
-	      <artifactId>jhee-frontend-business</artifactId>
+	      <artifactId>jhee-backend-business</artifactId>
 	      <groupId>io.github.agbaroni</groupId>
 	    </ejbModule>
 	    <jarModule>
-	      <artifactId>jhee-frontend-business-client</artifactId>
+	      <artifactId>jhee-backend-business-client</artifactId>
 	      <groupId>io.github.agbaroni</groupId>
 	    </jarModule>
-	    <webModule>
-	      <artifactId>jhee-frontend-services</artifactId>
-	      <contextRoot>/jhee/srvs</contextRoot>
-	      <groupId>io.github.agbaroni</groupId>
-	    </webModule>
-	    <webModule>
-	      <artifactId>jhee-frontend-web</artifactId>
-	      <contextRoot>/jhee/apps</contextRoot>
-	      <groupId>io.github.agbaroni</groupId>
-	    </webModule>
 	  </modules>
 	  <skinnyWars>true</skinnyWars>
 	  <version>8</version>
@@ -39,35 +29,23 @@
   </build>
   <dependencies>
     <dependency>
-      <artifactId>jhee-frontend-business</artifactId>
+      <artifactId>jhee-backend-business</artifactId>
       <groupId>io.github.agbaroni</groupId>
       <type>ejb</type>
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <artifactId>jhee-frontend-business-client</artifactId>
+      <artifactId>jhee-backend-business-client</artifactId>
       <groupId>io.github.agbaroni</groupId>
-      <version>0.1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>jhee-frontend-services</artifactId>
-      <groupId>io.github.agbaroni</groupId>
-      <type>war</type>
-      <version>0.1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <artifactId>jhee-frontend-web</artifactId>
-      <groupId>io.github.agbaroni</groupId>
-      <type>war</type>
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <groupId>io.github.agbaroni</groupId>
   <modelVersion>4.0.0</modelVersion>
-  <name>JHEE - Frontend - Application</name>
+  <name>JHEE - Backend - Application</name>
   <packaging>ear</packaging>
   <parent>
-    <artifactId>jhee-frontend-parent</artifactId>
+    <artifactId>jhee-backend-parent</artifactId>
     <groupId>io.github.agbaroni</groupId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>

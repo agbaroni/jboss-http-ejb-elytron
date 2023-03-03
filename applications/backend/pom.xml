@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>jhee-frontend-parent</artifactId>
+  <artifactId>jhee-backend-parent</artifactId>
   <build>
     <plugins>
       <!-- <plugin> -->
@@ -76,16 +76,13 @@
     <module>application</module>
     <module>business</module>
     <module>business-client</module>
-    <!-- <module>persistence</module> -->
-    <module>services</module>
-    <module>web</module>
   </modules>
-  <name>JHEE - Frontend</name>
+  <name>JHEE - Backend</name>
   <packaging>pom</packaging>
   <parent>
     <artifactId>jhee-parent</artifactId>
     <groupId>io.github.agbaroni</groupId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
-  <version>0.1.0-SNAPSHOT</version> 
+  <!-- <version>0.1.0-SNAPSHOT</version> -->
 </project>

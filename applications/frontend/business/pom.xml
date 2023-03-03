@@ -22,13 +22,14 @@
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <artifactId>jhee-frontend-persistence</artifactId>
+      <artifactId>jhee-persistence</artifactId>
       <groupId>io.github.agbaroni</groupId>
       <version>0.1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <groupId>io.github.agbaroni</groupId>
   <modelVersion>4.0.0</modelVersion>
+  <name>JHEE - Frontend - Business</name>
   <packaging>ejb</packaging>
   <parent>
     <artifactId>jhee-frontend-parent</artifactId>

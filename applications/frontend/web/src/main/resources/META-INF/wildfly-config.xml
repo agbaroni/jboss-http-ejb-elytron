@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <authentication-client xmlns="urn:elytron:1.6">
+    <authentication-rules>
+      <rule use-configuration="default"/>
+    </authentication-rules>
+    <authentication-configurations>
+      <configuration name="default">
+        <sasl-mechanism-selector selector="#ALL"/>
+        <set-user-name name="remote1"/>
+        <credentials>
+          <clear-password password="password"/>
+        </credentials>
+	<providers>
+          <use-service-loader />
+        </providers>
+      </configuration>
+    </authentication-configurations>
+  </authentication-client>
+  <!-- <jboss-ejb-client xmlns="urn:jboss:ejb-client:1.4"> -->
+  <!--   <client-context> -->
+  <!--     <profile name="CustomProfile" /> -->
+  <!--   </client-context> -->
+  <!-- </jboss-ejb-client> -->
+</configuration>

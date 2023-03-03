@@ -55,6 +55,24 @@ embed-server --server-config=standalone.xml
 
 /subsystem=elytron/security-domain=CustomRemotingDomain:add(default-realm=CustomRemotingRealm,realms=[{realm=CustomRemotingRealm,role-decoder=groups-to-roles}],permission-mapper=default-permission-mapper)
 
+/subsystem=ejb3/application-security-domain=CustomRemotingDomain:add(security-domain=CustomRemotingDomain)
+
+/subsystem=elytron/http-authentication-factory=CustomRemotingHTTPFactory:add(security-domain=CustomRemotingDomain,http-server-mechanism-factory=global,mechanism-configurations=[{mechanism-realm-configurations=[{realm-name=CustomRemotingRealm}],mechanism-name=BASIC}])
+
+module add --name=org.postgresql --resources=../../../postgresql-42.5.4.jar --dependencies=javax.api,javax.transaction.api,javaee.api
+
+/subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
+
+xa-data-source add --name=TestDS --jndi-name=java:jboss/TestDS --driver-name=postgresql --user-name=test --password=test --validate-on-match=true --background-validation=false --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter --xa-datasource-properties={"ServerName"=>"172.31.252.1","PortNumber"=>"5433","DatabaseName"=>"test"}
+
+/subsystem=undertow/server=default-server/host=default-host/setting=http-invoker:undefine-attribute(name=security-realm)
+
+/subsystem=undertow/server=default-server/host=default-host/setting=http-invoker:write-attribute(name=http-authentication-factory,value=CustomRemotingHTTPFactory)
+
+
+
+
+###
 /subsystem=elytron/sasl-authentication-factory=CustomRemotingSASLFactory:add(security-domain=CustomRemotingDomain,sasl-server-factory=configured,mechanism-configurations=[{mechanism-name=DIGEST-MD5,mechanism-realm-configurations=[{realm-name=CustomRemotingRealm}]}])
 
 /subsystem=remoting/http-connector=http-remoting-connector:undefine-attribute(name=security-realm)
