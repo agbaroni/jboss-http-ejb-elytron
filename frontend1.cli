@@ -49,23 +49,28 @@ embed-server --server-config=standalone.xml
 
 /subsystem=ejb3/application-security-domain=AppDomain:add(security-domain=CustomApplicationDomain)
 
-/subsystem=elytron/authentication-configuration=CustomAuthConfiguration:add(authentication-name=remote1,credential-reference={clear-text=password},security-domain=CustomRemotingDomain)
-
-/subsystem=elytron/authentication-context=CustomAuthContext:add(match-rules=[{authentication-configuration=CustomAuthConfiguration,match-path="/wildfly-services"}])
-
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=RemoteEJBSocket:add(host=172.31.254.1,port=8080)
-
-/subsystem=remoting/remote-outbound-connection=RemoteEJBConnection:add(authentication-context=CustomAuthContext,outbound-socket-binding-ref=RemoteEJBSocket)
-
 /subsystem=ejb3/remoting-profile=CustomProfile:add()
-
 /subsystem=ejb3/remoting-profile=CustomProfile/remote-http-connection=ejb-http-connection:add(uri="http://172.31.254.1:8080/wildfly-services")
+
+/subsystem=remoting/http-connector=http-remoting-connector:undefine-attribute(name=security-realm)
 
 /subsystem=undertow/application-security-domain=AppDomain:add(http-authentication-factory=CustomApplicationHTTPFactory)
 
 /subsystem=elytron/properties-realm=CustomRemotingRealm:add(groups-properties={path=custom-remoting-groups.properties,relative-to=jboss.server.config.dir},users-properties={digest-realm-name=CustomRemotingRealm,path=custom-remoting-users.properties,relative-to=jboss.server.config.dir},groups-attribute=groups)
 
 /subsystem=elytron/security-domain=CustomRemotingDomain:add(default-realm=CustomRemotingRealm,realms=[{realm=CustomRemotingRealm,role-decoder=groups-to-roles}],permission-mapper=default-permission-mapper)
+
+/subsystem=elytron/sasl-authentication-factory=CustomRemotingSASLFactory:add(security-domain=CustomRemotingDomain,mechanism-configurations=[{mechanism-name=DIGEST-MD5,mechanism-realm-configurations=[{realm-name=CustomRemotingRealm}]}],sasl-server-factory=global)
+
+/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=sasl-authentication-factory,value=CustomRemotingSASLFactory)
+
+/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=sasl-protocol,value=http)
+
+/subsystem=elytron/authentication-configuration=CustomAuthConfiguration:add(authentication-name=remote1,credential-reference={clear-text=password},security-domain=CustomRemotingDomain)
+/subsystem=elytron/authentication-context=CustomAuthContext:add(match-rules=[{authentication-configuration=CustomAuthConfiguration,match-path="/wildfly-services"}])
+/subsystem=elytron/authentication-context=CustomAuthContext:write-attribute(name=match-rules,value=[{authentication-configuration=CustomAuthConfiguration,match-host=172.31.254.1,match-port=8080,match-path="/wildfly-services",match-user=anonymous}])
+
+/subsystem=elytron:write-attribute(name=default-authentication-context,value=CustomAuthContext)
 
 module add --name=org.postgresql --resources=../../../postgresql-42.5.4.jar --dependencies=javax.api,javax.transaction.api,javaee.api
 
@@ -84,3 +89,7 @@ xa-data-source add --name=TestDS --jndi-name=java:jboss/TestDS --driver-name=pos
 /subsystem=remoting/remote-outbound-connection=RemoteBackendConnection1:add(outbound-socket-binding-ref=RemoteBackendSocket1,authentication-context=CustomAuthContext)
 
 /subsystem=ejb3/remoting-profile=CustomProfile:write-attribute(name=static-ejb-discovery,value=[{app-name="jhee-backend-0.1.0-SNAPSHOT",module-name="io.github.agbaroni-jhee-backend-business-0.1.0-SNAPSHOT",distinct-name="UserBuilderImpl!io.github.agbaroni.jhee.backend.business.client.UserBuilder?stateful",uri="http://172.31.254.1:8080/wildfly-services"}])
+
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=RemoteEJBSocket:add(host=172.31.254.1,port=8080)
+
+/subsystem=remoting/remote-outbound-connection=RemoteEJBConnection:add(authentication-context=CustomAuthContext,outbound-socket-binding-ref=RemoteEJBSocket)
