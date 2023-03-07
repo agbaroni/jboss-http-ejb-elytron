@@ -77,19 +77,3 @@ module add --name=org.postgresql --resources=../../../postgresql-42.5.4.jar --de
 /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
 
 xa-data-source add --name=TestDS --jndi-name=java:jboss/TestDS --driver-name=postgresql --user-name=test --password=test --validate-on-match=true --background-validation=false --valid-connection-checker-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker --exception-sorter-class-name=org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter --xa-datasource-properties={"ServerName"=>"172.31.252.1","PortNumber"=>"5433","DatabaseName"=>"test"}
-
-
-
-
-
-
-####
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=RemoteBackendSocket1:add(host=172.31.254.1,port=8080)
-
-/subsystem=remoting/remote-outbound-connection=RemoteBackendConnection1:add(outbound-socket-binding-ref=RemoteBackendSocket1,authentication-context=CustomAuthContext)
-
-/subsystem=ejb3/remoting-profile=CustomProfile:write-attribute(name=static-ejb-discovery,value=[{app-name="jhee-backend-0.1.0-SNAPSHOT",module-name="io.github.agbaroni-jhee-backend-business-0.1.0-SNAPSHOT",distinct-name="UserBuilderImpl!io.github.agbaroni.jhee.backend.business.client.UserBuilder?stateful",uri="http://172.31.254.1:8080/wildfly-services"}])
-
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=RemoteEJBSocket:add(host=172.31.254.1,port=8080)
-
-/subsystem=remoting/remote-outbound-connection=RemoteEJBConnection:add(authentication-context=CustomAuthContext,outbound-socket-binding-ref=RemoteEJBSocket)

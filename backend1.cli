@@ -68,13 +68,3 @@ xa-data-source add --name=TestDS --jndi-name=java:jboss/TestDS --driver-name=pos
 /subsystem=undertow/server=default-server/host=default-host/setting=http-invoker:undefine-attribute(name=security-realm)
 
 /subsystem=undertow/server=default-server/host=default-host/setting=http-invoker:write-attribute(name=http-authentication-factory,value=CustomRemotingHTTPFactory)
-
-
-
-
-###
-/subsystem=elytron/sasl-authentication-factory=CustomRemotingSASLFactory:add(security-domain=CustomRemotingDomain,sasl-server-factory=configured,mechanism-configurations=[{mechanism-name=DIGEST-MD5,mechanism-realm-configurations=[{realm-name=CustomRemotingRealm}]}])
-
-/subsystem=remoting/http-connector=http-remoting-connector:undefine-attribute(name=security-realm)
-
-/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=sasl-authentication-factory,value=CustomRemotingSASLFactory)
