@@ -17,26 +17,10 @@ nmcli connection add \
 
 nmcli connection add \
   connection.autoconnect TRUE \
-  connection.id JBF2 \
-  connection.interface-name jbf2 \
-  connection.type dummy \
-  ipv4.addresses 172.31.253.2/24 \
-  ipv4.method manual
-
-nmcli connection add \
-  connection.autoconnect TRUE \
   connection.id JBB1 \
   connection.interface-name jbb1 \
   connection.type dummy \
   ipv4.addresses 172.31.254.1/24 \
-  ipv4.method manual
-
-nmcli connection add \
-  connection.autoconnect TRUE \
-  connection.id JBB2 \
-  connection.interface-name jbb2 \
-  connection.type dummy \
-  ipv4.addresses 172.31.254.2/24 \
   ipv4.method manual
 ```
 
