@@ -71,6 +71,7 @@ public class Index implements Serializable {
     }
 
     public String getUserName() {
+	System.out.println("ok :)");
 	return userBuilder.getUserName();
     }
 

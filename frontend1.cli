@@ -66,7 +66,9 @@ embed-server --server-config=standalone.xml
 
 /subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=sasl-protocol,value=http)
 
-/subsystem=elytron/authentication-configuration=CustomAuthConfiguration:add(authentication-name=remote1,credential-reference={clear-text=password},security-domain=CustomRemotingDomain)
+# The security-domain attribute is set only for propagation, so here we don't need it
+/subsystem=elytron/authentication-configuration=CustomAuthConfiguration:add(authentication-name=remote1,credential-reference={clear-text=password})
+
 /subsystem=elytron/authentication-context=CustomAuthContext:add(match-rules=[{authentication-configuration=CustomAuthConfiguration,match-path="/wildfly-services"}])
 /subsystem=elytron/authentication-context=CustomAuthContext:write-attribute(name=match-rules,value=[{authentication-configuration=CustomAuthConfiguration,match-host=172.31.254.1,match-port=8080,match-path="/wildfly-services",match-user=anonymous}])
 

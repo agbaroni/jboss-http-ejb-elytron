@@ -43,6 +43,8 @@ public class UserBuilderImpl implements UserBuilder {
 
     @Override
     public String getUserName() {
+	System.out.println("ok :)");
+
 	return userName;
     }
 
