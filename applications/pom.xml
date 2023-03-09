@@ -85,5 +85,18 @@
   </modules>
   <name>JHEE</name>
   <packaging>pom</packaging>
+  <repositories>
+    <repository>
+      <id>redhat-ga</id>
+      <name>Red Hat Maven Repository (GA)</name>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://maven.repository.redhat.com/ga/</url>
+    </repository>
+  </repositories>
   <version>0.1.0-SNAPSHOT</version> 
 </project>

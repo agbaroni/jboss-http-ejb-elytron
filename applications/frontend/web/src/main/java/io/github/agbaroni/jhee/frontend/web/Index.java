@@ -6,12 +6,10 @@ import java.io.Serializable;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
-// import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-// import javax.inject.Inject;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-// import javax.naming.Context;
 import javax.naming.InitialContext;
 
 @Named
@@ -20,19 +18,10 @@ public class Index implements Serializable {
 
     private static final long serialVersionUID = 12265166420150L;
 
-    // @EJB(lookup = "ejb:jhee-backend-0.1.0-SNAPSHOT/io.github.agbaroni-jhee-backend-business-0.1.0-SNAPSHOT/UserBuilderImpl!io.github.agbaroni.jhee.backend.business.client.UserBuilder?stateful")
+    @Inject
     private UserBuilder userBuilder;
 
     private String message;
-
-    @PostConstruct
-    public void init() {
-	try {
-	    userBuilder = (UserBuilder) new InitialContext().lookup("ejb:jhee-backend-0.1.0-SNAPSHOT/io.github.agbaroni-jhee-backend-business-0.1.0-SNAPSHOT/UserBuilderImpl!io.github.agbaroni.jhee.backend.business.client.UserBuilder?stateful");
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
-    }
 
     public Object add() {
 	setFirstName(null);
@@ -57,8 +46,6 @@ public class Index implements Serializable {
     }
 
     public Object confirmUserName() {
-	System.out.println(userBuilder.hashCode());
-
 	return null;
     }
 
@@ -71,7 +58,6 @@ public class Index implements Serializable {
     }
 
     public String getUserName() {
-	System.out.println("ok :)");
 	return userBuilder.getUserName();
     }
 

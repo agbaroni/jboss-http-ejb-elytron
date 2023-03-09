@@ -11,10 +11,14 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Remote({ UserBuilder.class })
 @Stateful
 public class UserBuilderImpl implements UserBuilder {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserBuilderImpl.class);
     private static final long serialVersionUID = 27658224355538L;
 
     @PersistenceContext
@@ -23,13 +27,6 @@ public class UserBuilderImpl implements UserBuilder {
     private String firstName;
     private String lastName;
     private String userName;
-
-    // @PrePassivate
-    // public void clean() {
-    // 	firstName = null;
-    // 	lastName = null;
-    // 	userName = null;
-    // }
 
     @Override
     public String getFirstName() {
@@ -43,23 +40,27 @@ public class UserBuilderImpl implements UserBuilder {
 
     @Override
     public String getUserName() {
-	System.out.println("ok :)");
-
 	return userName;
     }
 
     @Override
     public void setFirstName(String firstName) {
+	logger.info("Saving firstName = " + firstName);
+
 	this.firstName = firstName;
     }
 
     @Override
     public void setLastName(String lastName) {
+	logger.info("Saving lastName = " + lastName);
+
 	this.lastName = lastName;
     }
 
     @Override
     public void setUserName(String userName) {
+	logger.info("Saving userName = " + userName);
+
 	this.userName = userName;
     }
 
@@ -71,5 +72,7 @@ public class UserBuilderImpl implements UserBuilder {
 	user.setLastName(lastName);
 
 	entityManager.persist(user);
+
+	logger.info("Persisted new user");
     }
 }
